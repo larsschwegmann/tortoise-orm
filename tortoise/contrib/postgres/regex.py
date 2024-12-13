@@ -2,6 +2,8 @@ import enum
 from typing import cast
 
 from pypika_tortoise.terms import BasicCriterion, Term
+from pypika_tortoise.functions import Cast
+from pypika_tortoise.enums import SqlTypes
 
 
 class PostgresRegexMatching(enum.Enum):
