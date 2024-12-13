@@ -2,10 +2,8 @@ import enum
 from typing import cast
 
 from pypika_tortoise.terms import BasicCriterion, Term
-from pypika_tortoise.functions import Cast
+from pypika_tortoise.functions import Cast, Coalesce
 from pypika_tortoise.enums import SqlTypes
-
-from tortoise.functions import Coalesce
 
 
 class PostgresRegexMatching(enum.Enum):
@@ -15,9 +13,9 @@ class PostgresRegexMatching(enum.Enum):
 
 def postgres_posix_regex(field: Term, value: str):
     term = cast(Term, field.wrap_constant(value))
-    return BasicCriterion(PostgresRegexMatching.POSIX_REGEX, field, term)
+    return BasicCriterion(PostgresRegexMatching.POSIX_REGEX, Coalesce(Cast(field, SqlTypes.VARCHAR), ""), term)
 
 
 def postgres_insensitive_posix_regex(field: Term, value: str):
     term = cast(Term, field.wrap_constant(value))
-    return BasicCriterion(PostgresRegexMatching.IPOSIX_REGEX, field, term)
+    return BasicCriterion(PostgresRegexMatching.IPOSIX_REGEX, Coalesce(Cast(field, SqlTypes.VARCHAR), ""), term)
