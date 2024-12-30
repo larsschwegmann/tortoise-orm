@@ -3,9 +3,9 @@ import re
 from typing import cast
 
 import aiosqlite
-from pypika.enums import SqlTypes
-from pypika.functions import Cast, Coalesce
-from pypika.terms import BasicCriterion, Term
+from pypika_tortoise.enums import SqlTypes
+from pypika_tortoise.functions import Cast, Coalesce
+from pypika_tortoise.terms import BasicCriterion, Term
 
 
 class SQLiteRegexMatching(enum.Enum):
